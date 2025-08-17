@@ -1,72 +1,161 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Comic Sans MS', cursive;
-    text-align: center;
-    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+/* Mobile-first responsive styles */
+
+:root{
+    --bg1: #ff9a9e;
+    --bg2: #fad0c4;
+    --accent: #ff4d6d;
+    --accent-2: #ff7a9a;
+    --muted: rgba(255,255,255,0.9);
+    --card: rgba(255,255,255,0.06);
+  }
+  
+  /* Reset */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2));
+    color: #fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    min-height:100vh;
+    overflow-x:hidden;
+    padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+  }
+  
+  /* Layout helpers */
+  .center{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    min-height: calc(100vh - 40px);
+    text-align:center;
+    padding: 28px 12px;
+  }
+  
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    padding: 18px;
+    border-radius: 14px;
+    width: 100%;
+    max-width:720px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* Typography */
+  .title{
+    margin:0;
+    font-weight:700;
+    font-size: clamp(1.5rem, 5vw, 2.6rem);
+    line-height:1.05;
+    letter-spacing: -0.01em;
+  }
+  .title.small{ font-size: clamp(1.25rem, 4.5vw, 1.6rem); }
+  
+  .lead{
+    margin:0;
+    opacity:0.95;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+  }
+  
+  /* Buttons */
+  .controls{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+  .btn{
+    border:0;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 1rem;
+    min-width: 120px;
+    cursor:pointer;
+    background: transparent;
     color: white;
-    overflow: hidden;
-}
-
-button {
-    padding: 15px 25px;
-    background: #ff4d6d;
-    border: none;
-    border-radius: 30px;
-    font-size: 18px;
+    outline: none;
+  }
+  .btn:focus{ box-shadow: 0 0 0 4px rgba(255,77,109,0.18); }
+  .btn.primary{
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    box-shadow: 0 6px 18px rgba(255,77,109,0.24);
+  }
+  .btn.ghost{
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  
+  /* Typewriter */
+  .typewriter{
+    font-size: 1rem;
+    line-height:1.5;
+    white-space:pre-wrap;
+    word-break:break-word;
+    max-width: 38rem;
+    margin: 8px auto 0;
+  }
+  
+  /* Carousel */
+  .gallery-wrap{ padding: 20px 0; display:flex; flex-direction:column; gap:14px; align-items:center; width:100% }
+  .carousel{ position:relative; width:100%; max-width:720px; overflow:hidden; border-radius:14px; }
+  .slides{
+    display:flex;
+    transition: transform 450ms ease;
+    will-change: transform;
+  }
+  .slides img{
+    width:100%;
+    height: clamp(220px, 55vw, 420px);
+    object-fit: cover;
+    display:block;
+    flex:0 0 100%;
+  }
+  
+  /* Carousel controls */
+  .cg{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:20;
+    background: rgba(0,0,0,0.35);
     color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #ff1e4d;
-    transform: scale(1.1);
-}
-
-.birthday-title {
-    font-size: 3em;
-    animation: pulse 1s infinite;
-}
-.subtitle {
-    font-size: 1.2em;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.message-box {
-    margin: 50px;
-    font-size: 1.5em;
-}
-
-.carousel img {
-    width: 60%;
-    max-width: 300px;
-    margin: 10px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    opacity: 0;
-    position: absolute;
-    left: 10%;
-    transition: opacity 1s ease-in-out;
-}
-
-.carousel img.active {
-    opacity: 1;
-    position: relative;
-}
-
-.love-text {
-    font-size: 3em;
-    color: yellow;
-    animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 0 0 10px yellow, 0 0 20px red; }
-    to { text-shadow: 0 0 20px red, 0 0 30px yellow; }
-}
+    border:0; border-radius:999px;
+    width:42px; height:42px;
+    font-size:1.4rem;
+    display:flex; align-items:center; justify-content:center;
+    backdrop-filter: blur(4px);
+  }
+  .cg:active{ transform:translateY(-50%) scale(0.98); }
+  .cg.prev{ left:10px; }
+  .cg.next{ right:10px; }
+  
+  /* Confetti canvas covers whole screen but doesn't block clicks */
+  .confetti-canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+  }
+  
+  /* Floating heart styles created by JS, use a default if JS fails */
+  .heart{
+    position:fixed;
+    bottom: -40px;
+    font-size:20px;
+    opacity: 0.95;
+    will-change: transform, opacity;
+    pointer-events:none;
+  }
+  
+  /* Accessibility: reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior: auto !important; }
+  }
+  
+  /* Larger screens tweaks */
+  @media(min-width:720px){
+    .center{ padding:36px; }
+    .title{ font-size: clamp(2rem, 4.2vw, 3.2rem); }
+    .btn{ min-width:140px; padding:14px 20px; font-size:1.05rem; border-radius:16px; }
+    .typewriter{ font-size: 1.05rem; }
+  }
+  

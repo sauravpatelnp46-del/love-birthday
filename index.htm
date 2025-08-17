@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday 🎉</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preload" href="music.mp3" as="audio">
+</head>
+<body class="page welcome" data-page="index">
+    <audio autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+  <main class="center">
+    <h1 class="title" aria-live="polite">❤️😘 Happy Birthday, My Love 😘❤️</h1>
+    <p class="lead">Today is as special as you are ❤️ 💖</p>
+
+    <div class="controls">
+      <button id="beginBtn" class="btn primary" aria-label="Begin surprise">Begin Surprise</button>
+    </div>
+  </main>
+
+  <audio id="bgAudio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+    <!-- fallback text -->
+  </audio>
+
+  <script src="hearts.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const begin = document.getElementById('beginBtn');
+      const skip = document.getElementById('skipBtn');
+      const audio = document.getElementById('bgAudio');
+
+      // Try to play background music on first user gesture
+      function playAudio() {
+        audio.play().catch(()=>{/* ignore autoplay block until gesture */});
+      }
+
+      begin.addEventListener('click', () => {
+        playAudio();
+        location.href = 'message.html';
+      });
+      skip.addEventListener('click', () => {
+        playAudio();
+        location.href = 'gallery.html';
+      });
+
+      // make buttons nicely tappable on mobile
+      begin.addEventListener('touchend', ()=>{}, {passive:true});
+      skip.addEventListener('touchend', ()=>{}, {passive:true});
+    });
+  </script>
+</body>
+</html>

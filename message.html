@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Love Letter 💌</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page message" data-page="message">
+    <audio autoplay>
+        <source src="music1.mp3" type="audio/mpeg">
+    </audio>
+  <main class="center card">
+    <h2 class="title small">❤️This is for you My Love❤️</h2>
+    <div id="message" class="typewriter" aria-live="polite"></div>
+
+    <div class="controls" id="msgControls" aria-hidden="true">
+      <button id="toGallery" class="btn primary" aria-label="See the gallery">Click Here to See My Heart❤️</button>
+    </div>
+  </main>
+
+  <script src="hearts.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const text = `Happy Birthday, my love ❤️ Every moment with you is magical. You make my world brighter and my heart fuller. I’m so lucky to have you. I love you forever. 💕`;
+      const out = document.getElementById('message');
+      const controls = document.getElementById('msgControls');
+      const toGallery = document.getElementById('toGallery');
+
+      // Respect prefers-reduced-motion
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function typewriter(str, el, speed=40) {
+        if (reduce) { el.textContent = str; controls.removeAttribute('aria-hidden'); return; }
+        let i = 0;
+        (function step(){
+          if (i <= str.length) {
+            el.textContent = str.slice(0, i++);
+            setTimeout(step, speed);
+          } else {
+            controls.removeAttribute('aria-hidden');
+          }
+        })();
+      }
+
+      typewriter(text, out, 175);
+
+      toGallery.addEventListener('click', () => location.href = 'gallery.html');
+    });
+  </script>
+</body>
+</html>
