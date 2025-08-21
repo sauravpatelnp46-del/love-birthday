@@ -50,8 +50,14 @@
       begin.addEventListener('touchend', ()=>{}, {passive:true});
       skip.addEventListener('touchend', ()=>{}, {passive:true});
     });
+     document.body.addEventListener("click", function() {
+    const music = document.getElementById("bgMusic");
+    if (music.muted) {
+      music.muted = false;
+      music.play();
+    }
+  }, { once: true });
   </script>
 </body>
 </html>
-
 
